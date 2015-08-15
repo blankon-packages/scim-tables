@@ -1,0 +1,291 @@
+scim-tables (0.5.14-1blankon1) tambora; urgency=medium
+
+  * Rebuild 
+
+ -- Mahyuddin <yudi.al@gmail.com>  Sat, 15 Aug 2015 15:38:58 +0700
+
+scim-tables (0.5.14-1) unstable; urgency=medium
+
+  [ Tz-Huan Huang ]
+  * new upstream release
+    - allow entering hebrew punctuation gershayim
+  * control:
+    - bump to policy 3.9.6
+    - update Homepage
+
+  [ Adam Conrad ]
+  * control: transition ttf-* to fonts-* packages. (Closes: #716797)
+
+  [ Rolf Leggewie ]
+  * control: add myself to Uploaders
+  * patches: backport 31d48f8c2f to fix FTBFS
+
+ -- Rolf Leggewie <foss@rolf.leggewie.biz>  Fri, 24 Oct 2014 13:52:21 +0900
+
+scim-tables (0.5.13-1) unstable; urgency=low
+
+  * new upstream release.
+    - 2 new input methods:
+      * ru: RussianComputer
+      * he: HebrewComputer
+  * debian/control
+    - add libtool to Build-Depends.
+  * debian/rules
+    - run bootstrap before dh_auto_configure manually.
+
+ -- Tz-Huan Huang <tzhuan@gmail.com>  Thu, 30 May 2013 00:14:53 +0800
+
+scim-tables (0.5.12-1) unstable; urgency=low
+
+  * new upstream release. Closes: #689335, Closes: #499558. 
+  * debian/control
+    - add vcs-git and vcs-browser.
+    - add intltool to Build-Depends.
+  * debian/*.png.uu: merged by upstream, removed.
+
+ -- Tz-Huan Huang <tzhuan@gmail.com>  Wed, 10 Oct 2012 15:36:15 +0800
+
+scim-tables (0.5.11-1) unstable; urgency=low
+
+  * new upstream release.
+
+ -- Tz-Huan Huang <tzhuan@gmail.com>  Fri, 06 Jul 2012 16:07:01 +0800
+
+scim-tables (0.5.9-1) unstable; urgency=low
+
+  * new upstream release.
+    - 1 new input method:
+      * ru: RussianTraditional
+  * debian/scim-tables-additional.install: 1 new input method.
+
+ -- LI Daobing <lidaobing@gmail.com>  Sat, 04 Apr 2009 13:30:47 +0800
+
+scim-tables (0.5.8-1) unstable; urgency=low
+
+  * new upstream release
+    - debian/patches/40_dutch-translation.dpatch: merged by upstream, removed.
+      * debian/rules: remove the corresponding timestamp modification.
+    - 3 new input methods
+      * ml: Malayalam-phonetic
+      * ru: Translit
+      * uk: Ukrainian-Translit
+  * debian/control: 
+    - add LI Daobing to uploader.
+    - bump standards version to 3.8.0, no changes needed.
+    - rename XS-Vcs-* to Vcs-*.
+    - build-depends-on-1-revision: adjust version of libscim-dev.
+    - add Homepage field.
+    - update description of scim-tables-additional, add Ukrainian.
+  * debian/patches/00list: updated.
+  * debian/scim-tables-additional.install: 3 new input methods.
+  * add the missing icons for the 2 of the 3 new input methods:
+    - see SF bug #2022674.
+    - png files come from the upstream CVS.
+    - debian/control: build depends on sharutils.
+    - debian/Translit.png.uu: added.
+    - debian/Ukrainian-Translit.png.uu: added.
+    - debian/rules: use uudecode to restore the png when build.
+  * debian/rules:
+    - add get-orig-source.
+
+ -- LI Daobing <lidaobing@gmail.com>  Sun, 20 Jul 2008 12:41:34 +0800
+
+scim-tables (0.5.7-3) unstable; urgency=low
+
+  * Add 10_missing-header dpatch to add missing <cstring> header, fixing FTBFS
+    with GCC 4.3.  (Closes: #441597)
+  * Update debian/copyright.
+    - Update current maintainer information.
+    - Clarify the upstream download URL.
+    - Clarify copyright and license for Debian packaging.
+    - Refer to /usr/share/common-licenses/GPL-2 for version 2 of GPL instead
+      of the symbolic link.
+  * Change maintainer's email address.
+
+ -- Ming Hua <minghua-guest@users.alioth.debian.org>  Sat, 17 Nov 2007 09:08:32 -0600
+
+scim-tables (0.5.7-2) unstable; urgency=low
+
+  * Add Dutch translations by Ronald Stroethoff.
+    - In debian/patches/, create 40_dutch-translation.dpatch based on the PO
+      file sent to upstream mailing list, and enable it in 00list.
+    - The 40_dutch-translation patch also adds "nl" to ALL_LINGUAS in
+      configure.ac and configure.  Fix timestamp skews in debian/rules.
+    - Generate po/nl.gmo file before building in debian/rules.  Remove it
+      after cleaning the build.
+    - Add gettext to build dependency.
+  * Add "-W -g" compiler flags back.  The warnings are somehow useful when
+    reading the build logs, and the debug information will be useful for
+    manually built packages with DEB_BUILD_OPTIONS=nostrip.
+  * Use /usr/lib/scim-1.0/*/ instead of /usr/lib/scim-1.0/1.4.0/ as the module
+    installation path, so that binNMU is possible when SCIM's module ABI
+    changes.
+
+ -- Ming Hua <minghua@rice.edu>  Thu, 14 Jun 2007 16:09:31 -0500
+
+scim-tables (0.5.7-1) unstable; urgency=low
+
+  * New upstream release.
+    - Drop 01_CVS_fix-wildcard-character.dpatch, already included in upstream.
+    - Drop 10_scim-module-install-dir.dpatch, no longer needed with the
+      upsteam change to module installation path.  Bump build dependency to
+      libscim-dev (>= 1.4.6-1) to make sure the correct path is used.
+    - New Tamil Remington tables for scim-tables-additional.
+  * Rewrite debian/rules, using debian/rules from scim as template.
+    - Use the platform detection code recommended by autotools-dev.
+    - Drop unused "-W -g" compiler flags.
+    - Remove binary-common target and separate binary-arch and binary-indep
+      targets completely.
+    - Finally remove all the cruft introduced by dh_make.
+  * Update debian/watch file to use qa.debian.org redirect URL for
+    sourceforge.net.
+  * Add XS-Vcs-Svn and XS-Vcs-Browser fields.
+  * Use ${source:Version} for versioned dependency instead of deprecated
+    ${Source-Version}.  Add dpkg-dev (>= 1.13.19) to Build-Depends to support
+    this new variable.
+
+ -- Ming Hua <minghua@rice.edu>  Thu, 10 May 2007 23:39:42 -0500
+
+scim-tables (0.5.6-2) unstable; urgency=medium
+
+  * Medium urgency upload to fix an important bug and hope it can make into
+    etch.
+  * Apply patch from upstream so that wildcard character works properly.
+    (Closes: #358039)
+  * Update package descriptions to recommend other similar input method
+    packages.
+  * Make the four table data packages "Enhances: scim".
+  * Upgrade to policy version 3.7.2.2, no actual changes needed.
+
+ -- Ming Hua <minghua@rice.edu>  Sun, 12 Nov 2006 16:21:56 -0600
+
+scim-tables (0.5.6-1) unstable; urgency=low
+
+  * New upstream release.
+    - The ZhuYin table based on the data from http://opendesktop.org.tw/ is
+      renamed to ZhuYin-Big.  The ZhuYin table is reverted to the old version
+      based on the input table from OpenVanilla project.
+    - Add new CNS11643 table based on data from http://www.cmex.org.tw/.
+  * Update package descriptions.
+
+ -- Ming Hua <minghua@rice.edu>  Wed, 18 Jan 2006 15:11:05 -0600
+
+scim-tables (0.5.5-1) unstable; urgency=low
+
+  * New upstream release.
+    - The old table CangJie is renamed to CangJie5, and new table CangJie is
+      added.  The tables ZhuYin and Simplex are updated.  All these changes
+      are based on the input tables from http://opendesktop.org.tw/.
+    - The table EZ is replaced by new table EZ-Big from Woodman Tuen.
+
+ -- Ming Hua <minghua@rice.edu>  Sun, 11 Dec 2005 19:55:55 -0600
+
+scim-tables (0.5.4-2) unstable; urgency=low
+
+  * debian/control:  Relax the versioned dependency on scim-modules-table to
+    become friendly with binary NMUs.  (Closes: #342184)
+  * debian/control:  Make scim-modules-table Replaces scim as
+    scim-modules-table and old scim have overlapped files.  (Closes: #339733)
+
+ -- Ming Hua <minghua@rice.edu>  Tue,  6 Dec 2005 22:23:09 -0600
+
+scim-tables (0.5.4-1) unstable; urgency=low
+
+  * New upstream release.
+    - debian/control, debian/scim-modules-table.{install,docs}:  Build a new
+      binary package scim-modules-table with arch:any.  These code moved from
+      scim to scim-tables since scim 1.2.  (Closes: #327315)  [carlosliu]
+    - Fix a typo in German translation, thanks to Jens Seidel.
+      (Closes: #313910)
+  * Build against scim 1.4.1:
+    - debian/contol:  Use libscim-dev (>= 1.4.1) in Build-Depends instead of
+      scim-dev.  This should make scim-tables adapt to the new ABI.
+      (Closes: #323831)  [minghua]
+    - debian/patches/{00list,10_scim-module-install-dir.dpatch}:  Add patch to
+      use /usr/lib/scim-1.0/1.4.0/ as module installation path.  [carlosliu,
+      minghua]
+  * debian/control, debian/scim-tables-additional.install:  Add tables for new
+    supported languages: Arabic, Nepali, Thai, Vietanamese and several Indic
+    languages (Bengali, Gujarati, Hindi, Kannada, Malayalam, Punjabi, Tamil
+    and Telugu).  There are also new talbes for IPA-X-SAMPA and LaTeX.
+    [carlosliu, minghua]
+  * debian/control, debian/scim-tables-ko.install:  Add new tables
+    HangulRomaja.  [carlosliu]
+  * debian/control, debian/scim-tables-zh.install:  Add new tables CangJie3,
+    CantonHK, Quick, Stroke5 and Wu.  [carlosliu, minghua]
+  * debian/scim-modules-table.manpages, debian/scim-make-table.1: Write manual
+    page for /usr/bin/scim-make-table.  [minghua]
+  * debian/copyright:  List the upstream authors of input method tables,
+    clarify the licensing of Nippon table, and update FSF address.  [minghua]
+  * debian/control:  Update to policy version 3.6.2 (no actual changes).
+    [minghua]
+  * debian/patches/{00list,90_disable-skim.dpatch}:  Add a hackish patch to
+    prevent "make distclean" error when skim support is disabled.  [minghua]
+  * debian/watch:  Track all new versions.  [carlosliu]
+
+ -- Ming Hua <minghua@rice.edu>  Wed,  2 Nov 2005 22:02:10 -0600
+
+scim-tables (0.4.3-2) unstable; urgency=low
+
+  * debian/scim-tables-{additional,zh}.install:  Install the new tables Amharic
+    and Erbi-QS.  [minghua]
+  * debian/rules:  [minghua]
+    - Use --fail-missing in dh_install to make sure detecting new tables.
+    - Add ``make distclean'' in clean target.  [minghua]
+  * debian/copyright, debian/watch:  Change upstream website and download
+    repository.  [minghua]
+  * debian/control:  [minghua]
+    - Recommend Chinese truetype font packages for scim-tables-zh.
+    - Make all packages conflict with scim (>> 1.1.0).
+    - Clarified the input methods provided by scim-tables-zh.
+
+ -- Ming Hua <minghua@rice.edu>  Fri,  4 Feb 2005 12:52:15 -0600
+
+scim-tables (0.4.3-1) unstable; urgency=low
+
+  * Package new upstream release to match scim 1.0.1
+
+ -- Osamu Aoki <osamu@debian.org>  Thu, 21 Oct 2004 18:59:21 +0200
+
+scim-tables (0.3.5-3) unstable; urgency=medium
+
+  * Set urgency to medium, assuring this RC bug fix to go into sarge.
+  * Add pkg-config to Build-Depends, fixing the FTBFS bug.
+    (Closes: #259152)
+
+ -- Ming Hua <minghua@rice.edu>  Mon,  2 Aug 2004 21:35:10 -0500
+
+scim-tables (0.3.5-2) unstable; urgency=low
+
+  * Initial release for upload into the official Debian archive.
+  * Splitted the package according to the upstream scim-tables.spec
+  * Modified Array30.txt.in setting to "AUTO_COMMIT = FALSE".
+  * Many thanks to Ming Hua <minghua@rice.edu> for packaging
+    scim-tables-0.3.3-1 and 0.3.5-1 on Debian Alioth.
+  * NMU: I won't have time to maintain the package myself, so...
+    Ming Hua is still the maintainer.  :-)
+
+ -- Anthony Fok <foka@debian.org>  Mon,  7 Jun 2004 00:32:00 +0800
+
+scim-tables (0.3.5-1) unstable; urgency=low
+
+  * New upstream version 0.3.5.
+  * Add detailed introduction to each table-based input method in
+    debian/control, thanks to the suggestion by Carlos Z.F. Liu.
+
+ -- Ming Hua <minghua@rice.edu>  Wed, 28 Apr 2004 16:57:46 -0500
+
+scim-tables (0.3.3-1) unstable; urgency=low
+
+  * Initial Release, based on upstream version 0.3.3.
+  * Debianize as a single arch-independent binary package, will try to split
+    later.
+
+ -- Ming Hua <minghua@rice.edu>  Mon,  1 Mar 2004 03:02:42 -0600
+
+scim-tables (0.2.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Anthony Fok <foka@debian.org>  Mon,  7 Apr 2003 03:56:39 +0800
+
